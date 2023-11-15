@@ -15,6 +15,26 @@ If you have existing content authored in MDX, this integration will hopefully ma
 
 ## Example
 
+```js
+const outer = "Out"
+
+function test() {
+  const inner = "In"
+  console.log(outer, inner)
+  // Prints: "Out", "In"
+}
+
+test()
+console.log(outer, inner)
+// Throws Uncaught Reference Error: inner is not defined
+```
+
+`youtube: fYbhD_KMCOg`
+
+```
+(3a + b - 3) * 8a = y
+```
+
 Here is how you import and use a UI component inside of MDX.  
 When you open this page in the browser, you should see the clickable button below.
 
