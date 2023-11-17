@@ -1,25 +1,29 @@
 ---
+import type {
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+  GetStaticPaths,
+} from "astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogPost from "../../components/BlogPost.astro";
-import { tokenToString } from "typescript";
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<any> {
   const allPosts = await Astro.glob("../posts/*.md");
 
   //Your tag pages are now defined statically in [tag].astro. If you add a new tag to a blog post, you will also have to revisit this page and update your page routes.
 
-  //TODO: make this tags dynamic
+  //TODOne: make this tags dynamic
+
+  //TODO: check for every 'any' type here
 
   //
   let allUniqueTags = [
     ...new Set(
       allPosts
-        .map((post) => post.frontmatter.tags)
-        .reduce((tot, cur) => tot.concat(cur))
+        .map((post: any) => post.frontmatter.tags)
+        .reduce((tot, cur: any) => tot.concat(cur), [])
     ),
   ];
-
-  console.log(allUniqueTags);
 
   return allUniqueTags.map((tag) => ({
     params: {
@@ -29,6 +33,9 @@ export async function getStaticPaths() {
       posts: allPosts,
     },
   }));
+
+  type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+  type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
   // return [
   //   { params: { tag: "astro" }, props: { posts: allPosts } },
@@ -42,7 +49,7 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-const filteredPosts = posts.filter((post) =>
+const filteredPosts = posts.filter((post: any) =>
   post.frontmatter.tags?.includes(tag)
 );
 ---
@@ -51,7 +58,7 @@ const filteredPosts = posts.filter((post) =>
   <p>Posts tagged with {tag}</p>
   <ul>
     {
-      filteredPosts.map((post) => (
+      filteredPosts.map((post: any) => (
         <BlogPost url={post.url} title={post.frontmatter.title} />
       ))
     }

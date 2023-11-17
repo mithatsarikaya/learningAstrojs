@@ -1,0 +1,43 @@
+---
+import TagsList from "../../components/TagsList.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+// const allPosts = await Astro.glob("../posts/*.md");
+// let allUniqueTags = [
+//   ...new Set(
+//     allPosts
+//       .map((post: any) => post.frontmatter.tags)
+//       .reduce((tot, cur: any) => tot.concat(cur), [])
+//   ),
+// ];
+---
+
+<BaseLayout pageTitle="tags">
+  <TagsList />
+  <!-- <div class="tagContainer">
+    {
+      allUniqueTags.map((tag) => (
+        <a class="tag" href={`/tags/${tag}`}>
+          {tag}
+        </a>
+      ))
+    }
+  </div>
+  <style>
+    .tagContainer {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+    }
+    .tag {
+      text-decoration: none;
+      padding: 5px 10px;
+      border: 2px solid salmon;
+      text-align: center;
+    }
+    .tag:hover {
+      background-color: salmon;
+      border: wheat 2px solid;
+    }
+  </style> -->
+</BaseLayout>
